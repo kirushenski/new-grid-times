@@ -10,7 +10,7 @@ import Button from '../Button';
 
 const Header = () => {
   return (
-    <header>
+    <Wrapper>
       <SuperHeader>
         <Row>
           <ActionGroup>
@@ -22,23 +22,43 @@ const Header = () => {
             </button>
           </ActionGroup>
           <ActionGroup>
-            <button>
+            <UserButton>
               <User size={24} />
-            </button>
+            </UserButton>
+            <DesktopLogin>
+              <Button>Subscribe</Button>
+              <LoginButton>Already a subscriber?</LoginButton>
+            </DesktopLogin>
           </ActionGroup>
         </Row>
       </SuperHeader>
       <MainHeader>
         <Logo />
       </MainHeader>
-    </header>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.header`
+  @media ${QUERIES.desktopAndUp} {
+    display: grid;
+    grid-template-areas: 'cell';
+    align-items: center;
+    margin-block: 16px 80px;
+  }
+`
 
 const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
+
+  @media ${QUERIES.desktopAndUp} {
+    grid-area: cell;
+    background: transparent;
+    color: var(--color-gray-900);
+    padding: 0;
+  }
 `;
 
 const Row = styled(MaxWidthWrapper)`
@@ -65,6 +85,37 @@ const MainHeader = styled(MaxWidthWrapper)`
   justify-content: center;
   margin-top: 32px;
   margin-bottom: 48px;
+
+  @media ${QUERIES.desktopAndUp} {
+    grid-area: cell;
+    margin-block: 0;
+    justify-self: center;
+  }
 `;
+
+const UserButton = styled.button`
+  @media ${QUERIES.desktopAndUp} {
+    display: none;
+  }
+`
+
+const DesktopLogin = styled.div`
+  display: none;
+
+  @media ${QUERIES.desktopAndUp} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    margin-top: 28px;
+  }
+`
+
+const LoginButton = styled.button`
+  font-style: italic;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  color: var(--color-gray-900);
+`
 
 export default Header;
