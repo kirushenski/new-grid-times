@@ -12,6 +12,7 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import { QUERIES } from '../../constants';
 
 const MainStoryGrid = () => {
   return (
@@ -21,20 +22,20 @@ const MainStoryGrid = () => {
       </MainStorySection>
 
       <SecondaryStorySection>
-        <StoryList>
+        <SecondaryStoryList>
           {SECONDARY_STORIES.map((story, index) => (
             <SecondaryStory key={story.id} {...story} />
           ))}
-        </StoryList>
+        </SecondaryStoryList>
       </SecondaryStorySection>
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
             <OpinionStory key={story.id} {...story} />
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -53,17 +54,45 @@ const Wrapper = styled.div`
     'advertisement';
   gap: 48px;
   margin-bottom: 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    grid-template-areas:
+      'main-story secondary-stories'
+      'advertisement advertisement'
+      'opinion-stories opinion-stories';
+    grid-template-columns: 1fr 252px;
+    gap: 48px 16px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    grid-template-areas:
+      'main-story secondary-stories opinion-stories'
+      'main-story secondary-stories opinion-stories'
+      'main-story advertisement advertisement';
+    grid-template-columns: 1fr 402px 273px;
+    gap: 16px;
+  }
 `;
 
 const MainStorySection = styled.section`
   grid-area: main-story;
+
+  @media ${QUERIES.tabletAndUp} {
+    padding-right: 16px;
+    border-right: 1px solid var(--color-gray-300);
+  }
 `;
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
+
+  @media ${QUERIES.laptopAndUp} {
+    padding-right: 16px;
+    border-right: 1px solid var(--color-gray-300);
+  }
 `;
 
-const StoryList = styled.div`
+const SecondaryStoryList = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -77,12 +106,46 @@ const StoryList = styled.div`
   }
 `;
 
+const OpinionStoryList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media ${QUERIES.tabletOnly} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  > *:not(:last-child) {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-gray-300);
+
+    @media ${QUERIES.tabletOnly} {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  > *:not(:first-child) {
+    padding-top: 16px;
+
+    @media ${QUERIES.tabletOnly} {
+      padding-top: 0;
+    }
+  }
+`;
+
 const OpinionSection = styled.section`
   grid-area: opinion-stories;
 `;
 
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
+
+  @media ${QUERIES.laptopAndUp} {
+    padding-top: 16px;
+    border-top: 1px solid var(--color-gray-300);
+  }
 `;
 
 export default MainStoryGrid;
