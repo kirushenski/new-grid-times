@@ -40,7 +40,7 @@ const Header = () => {
 };
 
 const Wrapper = styled.header`
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     display: grid;
     grid-template-areas: 'cell';
     align-items: center;
@@ -53,7 +53,7 @@ const SuperHeader = styled.div`
   background: var(--color-gray-900);
   color: white;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     grid-area: cell;
     background: transparent;
     color: var(--color-gray-900);
@@ -86,7 +86,7 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-top: 32px;
   margin-bottom: 48px;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     grid-area: cell;
     margin-block: 0;
     justify-self: center;
@@ -94,7 +94,7 @@ const MainHeader = styled(MaxWidthWrapper)`
 `;
 
 const UserButton = styled.button`
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     display: none;
   }
 `
@@ -102,7 +102,7 @@ const UserButton = styled.button`
 const DesktopLogin = styled.div`
   display: none;
 
-  @media ${QUERIES.desktopAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     display: flex;
     flex-direction: column;
     gap: 8px;
